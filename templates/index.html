@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="wordChart"></canvas>
+    <script>
+        fetch('/data')
+            .then(response => response.json())
+            .then(data => {
+                const labels = data.map(item => item.word);
+                const counts = data.map(item => item.count);
+
+                new Chart(document.getElementById('wordChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Word Frequency',
+                            data: counts,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    }
+                });
+            });
+    </script>
+</body>
+</html>
